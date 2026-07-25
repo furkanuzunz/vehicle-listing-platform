@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit
+} from '@angular/core';
 
 import { VehicleListing } from './models/vehicle-listing';
 import { VehicleService } from './services/vehicle.service';
@@ -10,9 +15,18 @@ import { VehicleService } from './services/vehicle.service';
 })
 export class App implements OnInit {
   private readonly vehicleService = inject(VehicleService);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  readonly filters = ['Brand', 'Model', 'Minimum Price', 'Maximum Price', 'Minimum Year'];
-  readonly placeholderImage = 'https://placehold.co/900x500?text=Vehicle';
+  readonly filters = [
+    'Brand',
+    'Model',
+    'Minimum Price',
+    'Maximum Price',
+    'Minimum Year'
+  ];
+
+  readonly placeholderImage =
+    'https://placehold.co/900x500?text=Vehicle';
 
   listings: VehicleListing[] = [];
   isLoading = true;
@@ -23,10 +37,13 @@ export class App implements OnInit {
       next: (vehicles) => {
         this.listings = vehicles;
         this.isLoading = false;
+        this.changeDetectorRef.markForCheck();
       },
       error: () => {
-        this.errorMessage = 'Araçlar yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
+        this.errorMessage =
+          'Araçlar yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
         this.isLoading = false;
+        this.changeDetectorRef.markForCheck();
       },
     });
   }
