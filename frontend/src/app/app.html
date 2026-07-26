@@ -1,53 +1,15 @@
 <div class="page-shell">
   <header class="topbar">
-    <a class="brand" href="#">VehicleListing</a>
+    <a class="brand" routerLink="/">VehicleListing</a>
     <nav class="top-nav" aria-label="Primary navigation">
-      <a href="#">İlanlar</a>
-      <a href="#">İlan Ver</a>
+      <a routerLink="/">İlanlar</a>
+      <a routerLink="/create">İlan Ver</a>
       <a href="#">Giriş Yap</a>
     </nav>
   </header>
 
   <main class="main-content">
-    <section class="search-panel" aria-label="Vehicle search filters">
-      <div class="search-header">
-        <p class="eyebrow">Araç İlanları</p>
-        <h1>Aradığın aracı hızlıca bul.</h1>
-      </div>
-
-      <div class="filters-grid">
-        @for (filter of filters; track filter) {
-          <label class="filter-field">
-            <span>{{ filter }}</span>
-            <input type="text" placeholder="Seçiniz" />
-          </label>
-        }
-
-        <button class="search-button" type="button">Ara</button>
-      </div>
-    </section>
-
-    <section class="listings-section" aria-label="Recently added listings">
-      <div class="section-heading">
-        <h2>Son Eklenen İlanlar</h2>
-        <a href="#">Tümünü gör</a>
-      </div>
-
-      @if (isLoading) {
-        <p>İlanlar yükleniyor...</p>
-      } @else if (errorMessage) {
-        <p role="alert">{{ errorMessage }}</p>
-      } @else if (listings.length === 0) {
-        <p>Henüz araç ilanı bulunmuyor.</p>
-      } @else {
-        <div class="listings-grid">
-          @for (listing of listings; track listing.id) {
-            <app-vehicle-card 
-                    [listing]="listing" />
-          }
-        </div>
-      }
-    </section>
+    <router-outlet />
   </main>
 
   <footer class="footer">

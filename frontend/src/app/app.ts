@@ -1,49 +1,10 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  inject,
-  OnInit
-} from '@angular/core';
-
-import { VehicleCardComponent } from './components/vehicle-card/vehicle-card';
-import { VehicleListing } from './models/vehicle-listing';
-import { VehicleService } from './services/vehicle.service';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [VehicleCardComponent],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App implements OnInit {
-  private readonly vehicleService = inject(VehicleService);
-  private readonly changeDetectorRef = inject(ChangeDetectorRef);
-
-  readonly filters = [
-    'Brand',
-    'Model',
-    'Minimum Price',
-    'Maximum Price',
-    'Minimum Year'
-  ];
-
-  listings: VehicleListing[] = [];
-  isLoading = true;
-  errorMessage = '';
-
-  ngOnInit(): void {
-    this.vehicleService.getVehicles().subscribe({
-      next: (vehicles) => {
-        this.listings = vehicles;
-        this.isLoading = false;
-        this.changeDetectorRef.markForCheck();
-      },
-      error: () => {
-        this.errorMessage =
-          'Araçlar yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
-        this.isLoading = false;
-        this.changeDetectorRef.markForCheck();
-      },
-    });
-  }
-}
+export class App {}
