@@ -1,0 +1,19 @@
+<article class="listing-card">
+  <img
+    [src]="placeholderImage"
+    [alt]="listing().brand + ' ' + listing().model"
+  />
+  <div class="listing-info">
+    <div class="listing-top">
+      <div>
+        <h3>{{ listing().brand }} {{ listing().model }}</h3>
+        <p class="listing-meta">
+          {{ listing().year }} • ${{ listing().price }}
+        </p>
+      </div>
+      <span class="listing-badge">{{ listing().status }}</span>
+    </div>
+    <p class="listing-description">{{ listing().description }}</p>
+    <button type="button">İlanı İncele</button>
+  </div>
+</article>

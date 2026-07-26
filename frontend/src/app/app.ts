@@ -5,11 +5,13 @@ import {
   OnInit
 } from '@angular/core';
 
+import { VehicleCardComponent } from './components/vehicle-card/vehicle-card';
 import { VehicleListing } from './models/vehicle-listing';
 import { VehicleService } from './services/vehicle.service';
 
 @Component({
   selector: 'app-root',
+  imports: [VehicleCardComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -24,9 +26,6 @@ export class App implements OnInit {
     'Maximum Price',
     'Minimum Year'
   ];
-
-  readonly placeholderImage =
-    'https://placehold.co/900x500?text=Vehicle';
 
   listings: VehicleListing[] = [];
   isLoading = true;
