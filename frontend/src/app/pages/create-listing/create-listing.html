@@ -1,1 +1,65 @@
-<h1>İlan Ver</h1>
+<section class="create-listing-panel">
+  <header class="page-header">
+    <p class="eyebrow">İlan Ver</p>
+    <h1>Yeni Araç İlanı</h1>
+    <p>Aracınızın bilgilerini eksiksiz doldurarak ilanınızı oluşturun.</p>
+  </header>
+
+  <form
+    class="listing-form"
+    [formGroup]="listingForm"
+    (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <label class="form-field">
+        <span>Marka</span>
+        <input type="text" formControlName="brand" />
+        @if (listingForm.controls.brand.touched && listingForm.controls.brand.invalid) {
+          <small class="field-error">Marka alanı zorunludur.</small>
+        }
+      </label>
+
+      <label class="form-field">
+        <span>Model</span>
+        <input type="text" formControlName="model" />
+        @if (listingForm.controls.model.touched && listingForm.controls.model.invalid) {
+          <small class="field-error">Model alanı zorunludur.</small>
+        }
+      </label>
+
+      <label class="form-field">
+        <span>Yıl</span>
+        <input type="number" formControlName="year" />
+        @if (listingForm.controls.year.touched && listingForm.controls.year.invalid) {
+          <small class="field-error">1900 veya sonrası bir yıl girin.</small>
+        }
+      </label>
+
+      <label class="form-field">
+        <span>Fiyat</span>
+        <input type="number" formControlName="price" />
+        @if (listingForm.controls.price.touched && listingForm.controls.price.invalid) {
+          <small class="field-error">Geçerli bir fiyat girin.</small>
+        }
+      </label>
+
+      <label class="form-field form-field-wide">
+        <span>Açıklama</span>
+        <textarea rows="6" formControlName="description"></textarea>
+        @if (
+          listingForm.controls.description.touched &&
+          listingForm.controls.description.invalid
+        ) {
+          <small class="field-error">Açıklama alanı zorunludur.</small>
+        }
+      </label>
+    </div>
+
+    @if (errorMessage) {
+      <p class="submit-error" role="alert">{{ errorMessage }}</p>
+    }
+
+    <button class="submit-button" type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'İlan Gönderiliyor...' : 'İlanı Gönder' }}
+    </button>
+  </form>
+</section>

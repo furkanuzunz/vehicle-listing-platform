@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { CreateVehicleRequest } from '../models/create-vehicle-request';
 import { VehicleListing } from '../models/vehicle-listing';
 
 @Injectable({
@@ -13,5 +14,14 @@ export class VehicleService {
 
   getVehicles(): Observable<VehicleListing[]> {
     return this.http.get<VehicleListing[]>(this.apiUrl);
+  }
+
+  createVehicle(
+    request: CreateVehicleRequest
+  ): Observable<VehicleListing> {
+    return this.http.post<VehicleListing>(
+      this.apiUrl,
+      request
+    );
   }
 }
